@@ -1,19 +1,31 @@
-
-export default[{
-  path:'/',
-  name:'HOME',
-  redirect:{
-    name:'LOGIN'
+import courseRouter from './modules/course'
+export default [
+  {
+    // 登录
+    path: '/',
+    name: 'HOME',
+    redirect: {
+      name: 'LOGIN'
+    },
   },
-  children:[
-    {
-      path:'/login',
-      name:'LOGIN',
-      meta:{
-        title:'登录',
-        hideInMenu: true,
-      },
-      component:resolve=>required(['@/views/login.vue'],resolve)
-    }
-  ]
-}]
+  {
+    path: '/login',
+    name: 'LOGIN',
+    meta: {
+      title: '登录',
+      hideInMenu: true,
+    },
+    component: resolve => require(['@/views/login.vue'], resolve),
+  },
+  {
+    path: '/panel',
+    name: 'Panel',
+    redirect:{
+      name:'course-list'
+    },
+    component: resolve => require(['@/views/panel.vue'], resolve),
+    children:[
+      ...courseRouter
+    ]
+  },
+]

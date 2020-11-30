@@ -1,0 +1,88 @@
+body,
+html,
+#app,
+.panel {
+  height: 100%;
+}
+
+body {
+  font-size: 14px;
+  color: #333;
+}
+
+/* 登录 */
+.login-box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -180px;
+  width: 360px;
+  transform: translateY(-50%);
+  padding-bottom: 30px;
+  background-color: #fff;
+  border-radius: 9px;
+  box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.login-box h1.title {
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-top: 80px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.login-box .form {
+  margin: 0 50px;
+}
+
+.login-box .form .text {
+  color: #999;
+  overflow: hidden;
+}
+
+.login-box .form .text .pull-right {
+  line-height: 18px;
+  float: right;
+}
+
+.login-box .form .text .pull-right a {
+  display: block;
+  color: #999;
+  float: left;
+}
+
+.login-box .form .text .pull-right font {
+  float: left;
+  margin: 0 5px;
+  color: #cfd1d8;
+}
+
+.login-box .form .submit {
+  margin-top: 20px;
+  border-radius: 40px;
+  border: none;
+  color: #fff;
+  width: 100%;
+  height: 42px;
+  line-height: 42px;
+  font-size: 16px;
+  font-weight: normal;
+  background-color: #0e9dff;
+  background: linear-gradient(to left, #00aeff 0%, #2b7bff 100%);
+  cursor: pointer;
+  padding: 0;
+  letter-spacing: 2px;
+}
+
+.login-box .radio-box {
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.layout,
+.ivu-layout {
+  height: 100%;
+}
