@@ -1,6 +1,6 @@
+import studentRouter from './modules/student'
 import courseRouter from './modules/course'
-export default [
-  {
+export default [{
     // 登录
     path: '/',
     name: 'HOME',
@@ -20,11 +20,12 @@ export default [
   {
     path: '/panel',
     name: 'Panel',
-    redirect:{
-      name:'course-list'
+    redirect: {
+      name: 'course-list'
     },
     component: resolve => require(['@/views/panel.vue'], resolve),
-    children:[
+    children: [
+      ...studentRouter,
       ...courseRouter
     ]
   },

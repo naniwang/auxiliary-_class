@@ -86,3 +86,13 @@ body {
 .ivu-layout {
   height: 100%;
 }
+
+.ivu-layout-content {
+  height: 100%;
+  padding: 15px;
+}
+
+/* goods-table */
+.goods-table {
+  clear: both;
+}

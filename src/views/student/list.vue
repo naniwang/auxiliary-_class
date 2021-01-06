@@ -2,7 +2,7 @@
   <div class="page-course-list">
     <Content style="background:#F5F7F9;">
       <Card shadow>
-        <Button @click="addCourse" type="primary">添加课程</Button>
+        <Button @click="addStudent" type="primary">添加学生</Button>
         <Table
           stripe
           class="goods-table m-t-md"
@@ -20,19 +20,31 @@ export default {
     return {
       columns: [
         {
-          title: "课程号",
+          title: "学号",
           key: "",
         },
         {
-          title: "课程名",
+          title: "姓名",
           key: "",
         },
         {
-          title: "学时",
+          title: "性别",
           key: "",
         },
         {
-          title: "教材",
+          title: "联系电话",
+          key: "",
+        },
+        {
+          title: "联系地址",
+          key: "",
+        },
+        {
+          title: "所选课程",
+          key: "",
+        },
+        {
+          title: "所在班级",
           key: "",
         },
         {
@@ -51,7 +63,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.editCourse(params.row.id);
+                      this.editStudent(params.row.id);
                     },
                   },
                 },
@@ -68,11 +80,28 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.delCourse(params.row.id);
+                      this.delStudent(params.row.id);
                     },
                   },
                 },
                 "删除"
+              ),
+              h(
+                "Button",
+                {
+                  prop: {
+                    size: "small",
+                  },
+                  style: {
+                    marginRight: "5px",
+                  },
+                  on: {
+                    click: () => {
+                      this.updatePwd(params.row.id);
+                    },
+                  },
+                },
+                "修改密码"
               ),
             ]);
           },
@@ -88,7 +117,7 @@ export default {
   methods: {
     // 获取课程列表
     getList() {
-      courselist().then((res) => {
+      studentlist().then((res) => {
         if (res.code == 200) {
           this.tableData = res.response;
         } else {
@@ -96,18 +125,20 @@ export default {
         }
       });
     },
-    //点击添加课程
-    addCourse() {},
-    //点击编辑课程
-    editCourse(id) {},
-    //点击删除课程
-    delCourse(id) {
+    //点击添加学生
+    addStudent() {},
+    //点击编辑学生
+    editStudent(id) {},
+    //点击删除学生
+    delStudent(id) {
       this.$Modal.confirm({
         title: "提示",
-        content: "确定删除该课程吗？",
+        content: "确定删除该学生吗？",
         onOk: () => {},
       });
     },
+    //修改密码
+    updatePwd(id) {},
   },
 };
 </script>

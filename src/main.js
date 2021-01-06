@@ -18,6 +18,7 @@ Vue.use(ViewUI, {
 import 'view-design/dist/styles/iview.css';
 
 import './assets/css/common.css';
+import './assets/css/base.css';
 
 Vue.config.productionTip = false
 

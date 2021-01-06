@@ -33,7 +33,7 @@
         <Form ref="formLogin" :model="formLogin" :rules="ruleLogin" v-show="loginType==1">
           <h1 class="title">登录</h1>
           <FormItem prop="mobile">
-            <Input type="text" v-model="formLogin.mobile" placeholder="请输入手机号">
+            <Input type="text" v-model="formLogin.account" placeholder="请输入账号">
               <Icon type="ios-person-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>
@@ -42,13 +42,11 @@
               <Icon type="ios-lock-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>
-          <div class="text">
+          <!-- <div class="text">
             <div class="pull-right">
-              <!-- <a class="retrieve pointer" @click="changeLogin('4')">忘记密码?</a>
-              <font>|</font>-->
               <a class="register pointer" @click="changeLogin(0)">注册</a>
             </div>
-          </div>
+          </div>-->
           <Button type="primary" class="submit" @click="login('formLogin')">登录</Button>
         </Form>
         <div class="radio-box">
@@ -112,15 +110,15 @@ export default {
         ],
       },
       formLogin: {
-        mobile: "",
+        account: "",
         password: "",
       },
       ruleLogin: {
-        mobile: [
+        account: [
           {
             required: true,
             trigger: "blur",
-            validator: validateMobile,
+            message: "请输入账号",
           },
         ],
         password: [

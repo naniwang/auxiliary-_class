@@ -5,16 +5,26 @@
         <Head></Head>
         <Layout>
           <Sider class="side-menu" width="160" hide-trigger>
-            <Menu active-name="1-1" theme="dark" width="auto" :open-names="['1']">
+            <Menu :active-name="activeName" theme="dark" width="auto" :open-names="['1']">
               <Submenu name="1">
+                <template slot="title">
+                  <Icon type="ios-navigate"></Icon>学生
+                </template>
+                <MenuItem name="student-list" :to="{name:'student-list'}">学生管理</MenuItem>
+              </Submenu>
+              <Submenu name="2">
                 <template slot="title">
                   <Icon type="ios-navigate"></Icon>课程
                 </template>
-                <MenuItem name="1-1" :to="{name:'course-list'}">课程列表</MenuItem>
-                <MenuItem name="1-2" to="/login">Option 2</MenuItem>
-                <MenuItem name="1-3">Option 3</MenuItem>
+                <MenuItem name="course-list" :to="{name:'course-list'}">课程管理</MenuItem>
               </Submenu>
-              <Submenu name="2">
+              <Submenu name="3">
+                <template slot="title">
+                  <Icon type="ios-navigate"></Icon>成绩
+                </template>
+                <MenuItem name="grade-list" :to="{name:'grade-list'}">成绩管理</MenuItem>
+              </Submenu>
+              <Submenu name="4">
                 <template slot="title">
                   <Icon type="ios-navigate"></Icon>设置
                 </template>
@@ -37,7 +47,9 @@ export default {
     Head,
   },
   data() {
-    return {};
+    return {
+      activeName: "student-list",
+    };
   },
 };
 </script>
