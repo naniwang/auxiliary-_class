@@ -96,3 +96,18 @@ body {
 .goods-table {
   clear: both;
 }
+
+.have-menu .ivu-menu {
+  position: fixed;
+  left: 160px;
+  right: 0px;
+  top: 60px;
+}
+
+.have-menu>.ivu-layout-content {
+  padding-top: 60px;
+}
+
+.have-menu>.ivu-layout-content-2 {
+  padding-top: 75px;
+}
