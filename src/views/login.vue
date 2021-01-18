@@ -51,7 +51,7 @@
         </Form>
         <div class="radio-box">
           <RadioGroup v-model="userType">
-            <Radio :label="Number(1)">用户</Radio>
+            <Radio :label="Number(1)">学生</Radio>
             <Radio :label="Number(2)">管理员</Radio>
           </RadioGroup>
         </div>
@@ -63,13 +63,13 @@
 export default {
   data() {
     const validateMobile = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error("请输入手机号"));
-      } else if (!/^1[13456789]\d{9}$/.test(value)) {
-        return callback(new Error("手机号码格式不正确"));
-      } else {
-        return callback();
-      }
+      //   if (!value) {
+      //     return callback(new Error("请输入手机号"));
+      //   } else if (!/^1[13456789]\d{9}$/.test(value)) {
+      //     return callback(new Error("手机号码格式不正确"));
+      //   } else {
+      //     return callback();
+      //   }
     };
     const validate_confirm_pwd = () => {};
     return {
@@ -131,7 +131,7 @@ export default {
             required: true,
             trigger: "blur",
             min: 6,
-            message: "密码至少6位及以上",
+            message: "密码至少6位",
           },
         ],
       },
@@ -141,17 +141,64 @@ export default {
   methods: {
     //点击注册
     regist(name) {
-      this.$refs[name].validate((valid) => {
-        if (valid) {
-        }
-      });
+      // this.$refs[name].validate((valid) => {
+      //   if (valid) {
+      //   }
+      // });
     },
     //点击登录
     login(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
+          // 学生登录
+          if (this.userType == 1) {
+            this.$api.studentlogin(this.formLogin).then((res) => {
+              if (res.code == 200) {
+                this.$cookie.set("fdbToken", res.response, {
+                  expires: 1,
+                });
+                this.$store.commit("tokenToVuex");
+                this.getUserInfo(res.response, this.formLogi.account);
+              } else {
+                this.$Message.error(res.msg);
+              }
+            });
+          } else {
+            // 管理员登录
+            this.$api.managelogin(this.formLogin).then((res) => {
+              if (res.code == 200) {
+                this.$cookie.set("fdbToken", res.response, {
+                  expires: 1,
+                });
+                this.$store.commit("tokenToVuex");
+                this.getUserInfo(res.response, this.formLogi.account);
+              } else {
+                this.$Message.error(res.msg);
+              }
+            });
+          }
         }
       });
+    },
+    getUserInfo(type, account) {
+      this.$api
+        .userinfo({
+          type: type,
+          account: account,
+        })
+        .then((res) => {
+          if (res.code == 200) {
+            this.$cookie.set("fdnUser", JSON.stringify(res.response), {
+              expires: 1,
+            });
+            this.$store.commit("userToVuex");
+            this.$router.push({
+              name: "student-list",
+            });
+          } else {
+            this.$Message.error(res.msg);
+          }
+        });
     },
     // 切换登录注册
     changeLogin(type) {

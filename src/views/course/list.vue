@@ -81,6 +81,7 @@ export default {
       tableData: [],
       params: {
         name: "",
+        course_no: "",
       },
       loading: true,
     };
@@ -88,7 +89,7 @@ export default {
   methods: {
     // 获取课程列表
     getList() {
-      courselist().then((res) => {
+      this.$api.courselist(this.params).then((res) => {
         if (res.code == 200) {
           this.tableData = res.response;
         } else {
@@ -97,15 +98,39 @@ export default {
       });
     },
     //点击添加课程
-    addCourse() {},
+    addCourse() {
+      this.$router.push({
+        name: "course-add",
+      });
+    },
     //点击编辑课程
-    editCourse(id) {},
+    editCourse(id) {
+      this.$router.push({
+        name: "course-add",
+        query: {
+          id: id,
+        },
+      });
+    },
     //点击删除课程
     delCourse(id) {
       this.$Modal.confirm({
         title: "提示",
         content: "确定删除该课程吗？",
-        onOk: () => {},
+        onOk: () => {
+          this.$api
+            .delcourse({
+              id: id,
+            })
+            .then((res) => {
+              if (res.code == 200) {
+                this.$Message.success("删除成功");
+                this.getList();
+              } else {
+                this.$Message.error("删除失败");
+              }
+            });
+        },
       });
     },
   },

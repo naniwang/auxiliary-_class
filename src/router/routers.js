@@ -1,5 +1,6 @@
 import studentRouter from './modules/student'
 import courseRouter from './modules/course'
+import adminRouter from './modules/admin'
 export default [{
     // 登录
     path: '/',
@@ -26,7 +27,8 @@ export default [{
     component: resolve => require(['@/views/panel.vue'], resolve),
     children: [
       ...studentRouter,
-      ...courseRouter
+      ...courseRouter,
+      ...adminRouter
     ]
   },
 ]

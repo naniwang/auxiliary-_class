@@ -26,6 +26,12 @@
               </Submenu>
               <Submenu name="4">
                 <template slot="title">
+                  <Icon type="ios-navigate"></Icon>管理员
+                </template>
+                <MenuItem name="admin-list" :to="{name:'admin-list'}">管理员管理</MenuItem>
+              </Submenu>
+              <Submenu name="5">
+                <template slot="title">
                   <Icon type="ios-navigate"></Icon>设置
                 </template>
                 <MenuItem name="2-1">密码设置</MenuItem>

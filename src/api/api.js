@@ -13,6 +13,12 @@ export default {
     return fetch.fetchGet('manage/login', params);
   },
   /**
+   * 获取用户信息
+   */
+  userinfo(params) {
+    return fetch.fetchGet('user/info', params);
+  },
+  /**
    * 获取学生列表
    */
   studentlist(params) {
@@ -55,9 +61,21 @@ export default {
     return fetch.fetchGet('delete/course', params);
   },
   /**
+   * 管理员列表
+   */
+  adminlist(params) {
+    return fetch.fetchGet('admin/list', params);
+  },
+  /**
    * 添加管理员
    */
   addadmin(params) {
     return fetch.fetchGet('add/admin', params);
+  },
+  /**
+   * 设置管理员离职或在职
+   */
+  updateadminstatus(params) {
+    return fetch.fetchGet('update/admin/status', params);
   },
 }

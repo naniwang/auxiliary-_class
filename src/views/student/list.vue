@@ -80,7 +80,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.delStudent(params.row.id);
+                      this.delStudent(params.row.stu_no);
                     },
                   },
                 },
@@ -97,7 +97,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.updatePwd(params.row.id);
+                      this.updatePwd(params.row.stu_no);
                     },
                   },
                 },
@@ -110,6 +110,7 @@ export default {
       tableData: [],
       params: {
         name: "",
+        stu_no: "",
       },
       loading: true,
     };
@@ -117,7 +118,7 @@ export default {
   methods: {
     // 获取课程列表
     getList() {
-      studentlist().then((res) => {
+      this.$api.studentlist(this.params).then((res) => {
         if (res.code == 200) {
           this.tableData = res.response;
         } else {
@@ -126,19 +127,43 @@ export default {
       });
     },
     //点击添加学生
-    addStudent() {},
+    addStudent() {
+      this.$router.push({
+        name: "student-add",
+      });
+    },
     //点击编辑学生
-    editStudent(id) {},
+    editStudent(id) {
+      this.$router.push({
+        name: "student-add",
+        query: {
+          id: id,
+        },
+      });
+    },
     //点击删除学生
-    delStudent(id) {
+    delStudent(stu_no) {
       this.$Modal.confirm({
         title: "提示",
         content: "确定删除该学生吗？",
-        onOk: () => {},
+        onOk: () => {
+          this.$api
+            .delstudent({
+              stu_no: stu_no,
+            })
+            .then((res) => {
+              if (res.code == 200) {
+                this.$Message.success("删除成功");
+                this.getList();
+              } else {
+                this.$Message.error("删除失败");
+              }
+            });
+        },
       });
     },
     //修改密码
-    updatePwd(id) {},
+    updatePwd(stu_no) {},
   },
 };
 </script>
