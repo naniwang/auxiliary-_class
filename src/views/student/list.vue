@@ -16,7 +16,7 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       columns: [
         {
@@ -115,25 +115,30 @@ export default {
       loading: true,
     };
   },
+  created () {
+    this.getList()
+  },
   methods: {
-    // 获取课程列表
-    getList() {
-      this.$api.studentlist(this.params).then((res) => {
+    // 获取学生列表
+    getList () {
+      let res = this.$api.studentlist(this.params).then((res) => {
         if (res.code == 200) {
           this.tableData = res.response;
         } else {
           this.$Message.error(res.msg);
         }
+      }).catch(() => {
+        this.$Message.error('请求失败');
       });
     },
     //点击添加学生
-    addStudent() {
+    addStudent () {
       this.$router.push({
         name: "student-add",
       });
     },
     //点击编辑学生
-    editStudent(id) {
+    editStudent (id) {
       this.$router.push({
         name: "student-add",
         query: {
@@ -142,7 +147,7 @@ export default {
       });
     },
     //点击删除学生
-    delStudent(stu_no) {
+    delStudent (stu_no) {
       this.$Modal.confirm({
         title: "提示",
         content: "确定删除该学生吗？",
@@ -163,7 +168,7 @@ export default {
       });
     },
     //修改密码
-    updatePwd(stu_no) {},
+    updatePwd (stu_no) { },
   },
 };
 </script>

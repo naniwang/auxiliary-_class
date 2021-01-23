@@ -22,7 +22,7 @@ export default [{
     path: '/panel',
     name: 'Panel',
     redirect: {
-      name: 'course-list'
+      name: 'student-list'
     },
     component: resolve => require(['@/views/panel.vue'], resolve),
     children: [

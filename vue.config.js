@@ -26,18 +26,16 @@ module.exports = {
   // 这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
   devServer: {
     // // 环境配置
-    // host: '0.0.0.0',
     port: 5050,
-    https: false,
-    hotOnly: false,
-    open: false // 配置自动启动浏览器
-    //disableHostCheck: true,
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://vr-dev.deiyou.net', //API服务器的地址
-    //     ws: true, //代理websockets
-    //     changeOrigin: true, // 虚拟的站点需要更管origin
-    //   }
-    // },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000', //API服务器的地址
+        ws: false, //代理websockets
+        changeOrigin: true, // 虚拟的站点需要更管origin
+        pathRewrite: {
+          '^api': '/'
+        }
+      }
+    },
   }
 };

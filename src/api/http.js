@@ -31,15 +31,17 @@ export default {
     })
   },
   fetchGet: function (url, params, header) {
-    axios.get(url, {
-      params: params,
-      responseType: header ? header.responseType : 'json'
-    }).then(response => {
-      resolve(response.data)
-    }, err => {
-      reject(err)
-    }).catch(error => {
-      reject(error)
+    return new Promise((resolve, reject) => {
+      axios.get(url, {
+        params: params,
+        responseType: header ? header.responseType : 'json'
+      }).then(response => {
+        resolve(response.data)
+      }, err => {
+        reject(err)
+      }).catch(error => {
+        reject(error)
+      })
     })
   }
 }
