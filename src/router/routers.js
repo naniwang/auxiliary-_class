@@ -19,6 +19,15 @@ export default [{
     component: resolve => require(['@/views/login.vue'], resolve),
   },
   {
+    path: '/entrance',
+    name: 'student-entrance',
+    meta: {
+      title: '学生入口',
+      hideInMenu: true,
+    },
+    component: resolve => require(['@/views/entrance.vue'], resolve),
+  },
+  {
     path: '/panel',
     name: 'Panel',
     redirect: {

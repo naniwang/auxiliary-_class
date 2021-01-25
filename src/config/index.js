@@ -21,8 +21,8 @@ export default {
    * @description api请求基础路径
    */
   baseUrl: {
-    dev: 'http://localhost:3000',
-    pro: 'http://localhost:3000',
+    dev: 'http://localhost:3333',
+    pro: 'http://localhost:3333',
   },
   /**
    * @description 默认打开的首页的路由name值，默认为home

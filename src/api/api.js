@@ -37,6 +37,12 @@ export default {
     return fetch.fetchGet('api/del/student', params);
   },
   /**
+   * 获取学生详情
+   */
+  studentinfo(params) {
+    return fetch.fetchGet('api/student/info', params);
+  },
+  /**
    * 修改学生密码
    */
   updatestudentpwd(params) {
@@ -59,6 +65,12 @@ export default {
    */
   delcourse(params) {
     return fetch.fetchGet('api/delete/course', params);
+  },
+  /**
+   * 获取课程详情
+   */
+  courseinfo(params) {
+    return fetch.fetchGet('api/course/info', params);
   },
   /**
    * 管理员列表

@@ -40,15 +40,19 @@
             </Select>
           </FormItem>
         </Form>
+        <div>
+          <Button type="primary" @click="submit()">保存</Button>
+        </div>
       </Card>
     </Content>
   </div>
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       formValidate: {
+        id: 0,
         stu_no: "",
         name: "",
         gender: 1,
@@ -57,9 +61,50 @@ export default {
         address: "",
         course_id: [],
       },
-      ruleValidate: {},
+      ruleValidate: {
+        name: [
+          {
+            required: true,
+            trigger: 'blur',
+            message: '请输入姓名'
+          }
+        ]
+      },
       courseDrop: [],
     };
   },
+  created () {
+    if (this.$route.query.id) {
+      this.getDetail()
+    }
+  },
+  methods: {
+    //保存
+    submit () {
+      this.$refs.formValidate.validate(valid => {
+        if (valid) {
+          this.$api.addstudent(this.formValidate).then(res => {
+            if (res.code == 200) {
+              this.$Message.success('保存成功')
+            } else {
+              this.$Message.error(res.msg)
+            }
+          })
+        }
+      })
+    },
+    //获取详情
+    getDetail () {
+      this.$api.studentinfo(
+        { id: this.$route.query.id }
+      ).then(res => {
+        if (res.code == 200) {
+          this.formValidate = res.response
+        } else {
+          this.$Message.error(res.msg)
+        }
+      })
+    }
+  }
 };
 </script>

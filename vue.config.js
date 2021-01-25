@@ -29,7 +29,7 @@ module.exports = {
     port: 5050,
     proxy: {
       '/api': {
-        target: 'http://localhost:3000', //API服务器的地址
+        target: 'http://localhost:3333', //API服务器的地址
         ws: false, //代理websockets
         changeOrigin: true, // 虚拟的站点需要更管origin
         pathRewrite: {

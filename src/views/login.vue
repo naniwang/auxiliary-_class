@@ -61,7 +61,7 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     const validateMobile = (rule, value, callback) => {
       //   if (!value) {
       //     return callback(new Error("请输入手机号"));
@@ -71,7 +71,7 @@ export default {
       //     return callback();
       //   }
     };
-    const validate_confirm_pwd = () => {};
+    const validate_confirm_pwd = () => { };
     return {
       userType: 1, //1用户 2管理员
       loginType: 1, // 0 注册 1 登录
@@ -137,17 +137,17 @@ export default {
       },
     };
   },
-  created() {},
+  created () { },
   methods: {
     //点击注册
-    regist(name) {
+    regist (name) {
       // this.$refs[name].validate((valid) => {
       //   if (valid) {
       //   }
       // });
     },
     //点击登录
-    login(name) {
+    login (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
           // 学生登录
@@ -180,7 +180,7 @@ export default {
         }
       });
     },
-    getUserInfo(type, account) {
+    getUserInfo (type, account) {
       this.$api
         .userinfo({
           type: type,
@@ -192,16 +192,22 @@ export default {
               expires: 1,
             });
             this.$store.commit("userToVuex");
-            this.$router.push({
-              name: "student-list",
-            });
+            if (type == 'students') {
+              this.$router.push({
+                name: "student-entrance",
+              });
+            } else {
+              this.$router.push({
+                name: "student-list",
+              });
+            }
           } else {
             this.$Message.error(res.msg);
           }
         });
     },
     // 切换登录注册
-    changeLogin(type) {
+    changeLogin (type) {
       this.loginType = type;
     },
   },

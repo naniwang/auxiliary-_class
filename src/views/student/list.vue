@@ -12,6 +12,29 @@
         ></Table>
       </Card>
     </Content>
+    <Modal
+      v-model="updatePwdShow"
+      title="修改密码"
+      footer-hide
+      :closable="true"
+      :mask-closable="true"
+      @on-cancel="handleReset('formRef')"
+    >
+      <Form ref="formRef" :label-width="100">
+        <FormItem label="新密码">
+          <Input
+            type="text"
+            v-model="password"
+            :rules="[{required:true,trigger:'blur',message:'请输入新密码'},{required:true,trigger:'blur',min: 6, max:32,message:'请输入6~32位密码'}]"
+            placeholder="请输入新密码"
+          />
+        </FormItem>
+        <FormItem>
+          <Button type="primary" @click="handleSubmit('formRef')">确定</Button>
+          <Button @click="handleReset('formRef')" style="margin-left: 8px">取消</Button>
+        </FormItem>
+      </Form>
+    </Modal>
   </div>
 </template>
 <script>
@@ -113,6 +136,8 @@ export default {
         stu_no: "",
       },
       loading: true,
+      updatePwdShow: false,
+      password: ''
     };
   },
   created () {
@@ -168,7 +193,33 @@ export default {
       });
     },
     //修改密码
-    updatePwd (stu_no) { },
+    updatePwdBtn (stu_no) {
+      this.updatePwdShow = true;
+      this.stu_no = stu_no;
+    },
+    // 弹窗确定
+    handleSubmit (name) {
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          this.$api.updatestudentpwd({
+            stu_no: this.stu_no,
+            password: this.password
+          }).thens(res => {
+            if (res.code == 200) {
+              this.$Message.success('修改成功')
+              this.handleReset(name)
+            } else {
+              this.$Message.error(res.msg)
+            }
+          })
+        }
+      })
+    },
+    // 弹窗取消
+    handleReset (name) {
+      this.updatePwdShow = false;
+      this.$refs[name].resetFields()
+    }
   },
 };
 </script>
