@@ -135,6 +135,7 @@ export default {
           },
         ],
       },
+      repeatBool: true
     };
   },
   created () { },
@@ -150,6 +151,10 @@ export default {
     login (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
+          if (!this.repeatBool) {
+            return;
+          }
+          this.repeatBool = false;
           // 学生登录
           if (this.userType == 1) {
             this.$api.studentlogin(this.formLogin).then((res) => {
@@ -158,9 +163,10 @@ export default {
                   expires: 1,
                 });
                 this.$store.commit("tokenToVuex");
-                this.getUserInfo(res.response, this.formLogi.account);
+                this.getUserInfo(res.response, this.formLogin.account);
               } else {
                 this.$Message.error(res.msg);
+                this.repeatBool = true;
               }
             });
           } else {
@@ -171,9 +177,10 @@ export default {
                   expires: 1,
                 });
                 this.$store.commit("tokenToVuex");
-                this.getUserInfo(res.response, this.formLogi.account);
+                this.getUserInfo(res.response, this.formLogin.account);
               } else {
                 this.$Message.error(res.msg);
+                this.repeatBool = true;
               }
             });
           }
@@ -188,10 +195,11 @@ export default {
         })
         .then((res) => {
           if (res.code == 200) {
-            this.$cookie.set("fdnUser", JSON.stringify(res.response), {
+            this.$cookie.set("fdbUser", JSON.stringify(res.response), {
               expires: 1,
             });
             this.$store.commit("userToVuex");
+            this.$Message.success('登录成功')
             if (type == 'students') {
               this.$router.push({
                 name: "student-entrance",
@@ -204,6 +212,7 @@ export default {
           } else {
             this.$Message.error(res.msg);
           }
+          this.repeatBool = true;
         });
     },
     // 切换登录注册

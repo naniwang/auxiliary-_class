@@ -15,6 +15,7 @@ const mutations = {
   // 记录user到vuex
   userToVuex(state, data) {
     let user = cookie.get('fdbUser');
+    console.log(user,'user=======')
     if (user != undefined) {
       state.user = JSON.parse(user);
     }
@@ -43,7 +44,7 @@ const mutations = {
    */
   logout(state) {
     cookie.remove('fdbToken');
-    cookie.remove('user');
+    cookie.remove('fdbUser');
 
     state.fdbToken = '';
     state.user = {};

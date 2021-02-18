@@ -6,8 +6,8 @@
     <Content>
       <Card dis-hover class="m-t-md">
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="120">
-          <FormItem label="学号">
-            <Input v-model="formValidate.stu_no" style="width:300px" disabled="true"></Input>
+          <FormItem label="学号" v-if="$route.query.stu_no">
+            <Input v-model="formValidate.stu_no" style="width:300px" :disabled="true"></Input>
           </FormItem>
           <FormItem label="姓名" prop="name">
             <Input v-model="formValidate.name" style="width:300px"></Input>
@@ -52,7 +52,6 @@ export default {
   data () {
     return {
       formValidate: {
-        id: 0,
         stu_no: "",
         name: "",
         gender: 1,
@@ -74,7 +73,7 @@ export default {
     };
   },
   created () {
-    if (this.$route.query.id) {
+    if (this.$route.query.stu_no) {
       this.getDetail()
     }
   },
@@ -96,7 +95,7 @@ export default {
     //获取详情
     getDetail () {
       this.$api.studentinfo(
-        { id: this.$route.query.id }
+        { stu_no: this.$route.query.stu_no }
       ).then(res => {
         if (res.code == 200) {
           this.formValidate = res.response

@@ -5,7 +5,7 @@
       <Dropdown>
         <div style="display: inline-block;">
           <!-- <img class="avatar m-r-x" :src="$store.state.user.avatar" /> -->
-          <span style="margin-right:5px">18265658965</span>
+          <span style="margin-right:5px">{{$store.state.user.account}}</span>
           <Icon type="ios-arrow-down" class="down-select"></Icon>
         </div>
         <DropdownMenu slot="list" class="user-dropdown">
@@ -17,11 +17,19 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {};
   },
+  mounted () {
+    console.log(this.$store.state.user, 'user')
+  },
   methods: {
-    loginOut() {},
+    loginOut () {
+      this.$store.commit("logout");
+      this.$router.push({
+        name: 'LOGIN'
+      })
+    },
   },
 };
 </script>

@@ -10,6 +10,10 @@ body {
   color: #333;
 }
 
+.flex-set {
+  display: flex;
+}
+
 /* 登录 */
 .login-box {
   position: absolute;

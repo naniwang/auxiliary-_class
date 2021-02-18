@@ -10,7 +10,7 @@ export default {
    * 管理员登录
    */
   managelogin(params) {
-    return fetch.fetchGet('api/manage/login', params);
+    return fetch.fetchGet('api/admin/login', params);
   },
   /**
    * 获取用户信息

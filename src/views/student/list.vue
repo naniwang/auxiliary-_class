@@ -3,6 +3,29 @@
     <Content style="background:#F5F7F9;">
       <Card shadow>
         <Button @click="addStudent" type="primary">添加学生</Button>
+        <div class="pull-right">
+          <Form :label-width="60" class="flex-set">
+            <FormItem label="姓名">
+              <Input
+                v-model="params.name"
+                placeholder="请输入学生姓名"
+                style="width: 180px"
+                class="m-r-sm"
+              />
+            </FormItem>
+            <FormItem label="学号">
+              <Input
+                v-model="params.stiu_no"
+                placeholder="请输入学生学号"
+                style="width: 180px"
+                class="m-r-sm"
+              />
+            </FormItem>
+            <FormItem :label-width="0">
+              <Button @click="filter" type="primary">筛选</Button>
+            </FormItem>
+          </Form>
+        </div>
         <Table
           stripe
           class="goods-table m-t-md"
@@ -18,20 +41,19 @@
       footer-hide
       :closable="true"
       :mask-closable="true"
-      @on-cancel="handleReset('formRef')"
+      @on-cancel="handleReset()"
     >
-      <Form ref="formRef" :label-width="100">
-        <FormItem label="新密码">
-          <Input
-            type="text"
-            v-model="password"
-            :rules="[{required:true,trigger:'blur',message:'请输入新密码'},{required:true,trigger:'blur',min: 6, max:32,message:'请输入6~32位密码'}]"
-            placeholder="请输入新密码"
-          />
+      <Form ref="formRef" :model="pwdData" :label-width="100">
+        <FormItem
+          label="新密码"
+          prop="password"
+          :rules="[{ required: true, trigger: 'blur', message: '请输入新密码' }, { required: true, trigger: 'blur', min: 6, max: 32, message: '请输入6~32位密码' }]"
+        >
+          <Input type="text" v-model="pwdData.password" placeholder="请输入新密码" />
         </FormItem>
         <FormItem>
-          <Button type="primary" @click="handleSubmit('formRef')">确定</Button>
-          <Button @click="handleReset('formRef')" style="margin-left: 8px">取消</Button>
+          <Button type="primary" @click="handleSubmit()">确定</Button>
+          <Button @click="handleReset()" style="margin-left: 8px">取消</Button>
         </FormItem>
       </Form>
     </Modal>
@@ -44,23 +66,23 @@ export default {
       columns: [
         {
           title: "学号",
-          key: "",
+          key: "stu_no",
         },
         {
           title: "姓名",
-          key: "",
+          key: "name",
         },
         {
           title: "性别",
-          key: "",
+          key: "gender",
         },
         {
           title: "联系电话",
-          key: "",
+          key: "mobile",
         },
         {
           title: "联系地址",
-          key: "",
+          key: "address",
         },
         {
           title: "所选课程",
@@ -73,12 +95,13 @@ export default {
         {
           title: "操作",
           key: "action",
+          width: 230,
           render: (h, params) => {
             return h("div", [
               h(
                 "Button",
                 {
-                  prop: {
+                  props: {
                     size: "small",
                   },
                   style: {
@@ -86,7 +109,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.editStudent(params.row.id);
+                      this.editStudent(params.row.stu_no);
                     },
                   },
                 },
@@ -95,7 +118,7 @@ export default {
               h(
                 "Button",
                 {
-                  prop: {
+                  props: {
                     size: "small",
                   },
                   style: {
@@ -112,15 +135,15 @@ export default {
               h(
                 "Button",
                 {
-                  prop: {
+                  props: {
                     size: "small",
                   },
                   style: {
-                    marginRight: "5px",
+                    // marginRight: "5px",
                   },
                   on: {
                     click: () => {
-                      this.updatePwd(params.row.stu_no);
+                      this.updatePwdBtn(params.row.stu_no);
                     },
                   },
                 },
@@ -137,7 +160,10 @@ export default {
       },
       loading: true,
       updatePwdShow: false,
-      password: ''
+      pwdData: {
+        stu_no: '',
+        password: ''
+      },
     };
   },
   created () {
@@ -146,15 +172,20 @@ export default {
   methods: {
     // 获取学生列表
     getList () {
-      let res = this.$api.studentlist(this.params).then((res) => {
+      this.$api.studentlist(this.params).then((res) => {
         if (res.code == 200) {
           this.tableData = res.response;
+          this.loading = false;
         } else {
           this.$Message.error(res.msg);
         }
       }).catch(() => {
         this.$Message.error('请求失败');
       });
+    },
+    // 点击筛选
+    filter () {
+      this.getList()
     },
     //点击添加学生
     addStudent () {
@@ -163,11 +194,11 @@ export default {
       });
     },
     //点击编辑学生
-    editStudent (id) {
+    editStudent (stu_no) {
       this.$router.push({
         name: "student-add",
         query: {
-          id: id,
+          stu_no: stu_no,
         },
       });
     },
@@ -195,19 +226,16 @@ export default {
     //修改密码
     updatePwdBtn (stu_no) {
       this.updatePwdShow = true;
-      this.stu_no = stu_no;
+      this.pwdData.stu_no = stu_no;
     },
     // 弹窗确定
-    handleSubmit (name) {
-      this.$refs[name].validate(valid => {
+    handleSubmit () {
+      this.$refs.formRef.validate(valid => {
         if (valid) {
-          this.$api.updatestudentpwd({
-            stu_no: this.stu_no,
-            password: this.password
-          }).thens(res => {
+          this.$api.updatestudentpwd(this.pwdData).then(res => {
             if (res.code == 200) {
               this.$Message.success('修改成功')
-              this.handleReset(name)
+              this.handleReset()
             } else {
               this.$Message.error(res.msg)
             }
@@ -216,9 +244,9 @@ export default {
       })
     },
     // 弹窗取消
-    handleReset (name) {
+    handleReset () {
       this.updatePwdShow = false;
-      this.$refs[name].resetFields()
+      this.$refs.formRef.resetFields()
     }
   },
 };
