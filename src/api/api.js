@@ -1,16 +1,37 @@
 import fetch from './http';
 export default {
+  // 以下为学生操作内容
   /**
    * 学生登录
    */
   studentlogin(params) {
-    return fetch.fetchGet('api/student/login', params);
+    return fetch.fetchPost('api/student/login', params);
   },
+  /**
+   * 获取学生个人信息
+   */
+  personalinfo(params) {
+    return fetch.fetchGet('api/get/personal/info', params);
+  },
+  /**
+   * 修改密码
+   */
+  updatepwd(params) {
+    return fetch.fetchPost('api/update/personal/pwd', params);
+  },
+  /**
+   * 成绩查询
+   */
+  inquirecorse(params) {
+    return fetch.fetchGet('api/inquire/corse', params);
+  },
+
+  // 以下为管理员操作内容
   /**
    * 管理员登录
    */
   managelogin(params) {
-    return fetch.fetchGet('api/admin/login', params);
+    return fetch.fetchPost('api/admin/login', params);
   },
   /**
    * 获取用户信息
@@ -28,7 +49,7 @@ export default {
    * 添加编辑学生
    */
   addstudent(params) {
-    return fetch.fetchGet('api/add/student', params);
+    return fetch.fetchPost('api/add/student', params);
   },
   /**
    * 删除学生
@@ -58,7 +79,7 @@ export default {
    * 添加课程
    */
   addcourse(params) {
-    return fetch.fetchGet('api/add/course', params);
+    return fetch.fetchPost('api/add/course', params);
   },
   /**
    * 删除课程
@@ -82,7 +103,7 @@ export default {
    * 添加管理员
    */
   addadmin(params) {
-    return fetch.fetchGet('api/add/admin', params);
+    return fetch.fetchPost('api/add/admin', params);
   },
   /**
    * 设置管理员离职或在职

@@ -138,7 +138,9 @@ export default {
       repeatBool: true
     };
   },
-  created () { },
+  created () {
+    this.$store.commit("logout");
+  },
   methods: {
     //点击注册
     regist (name) {
@@ -168,6 +170,8 @@ export default {
                 this.$Message.error(res.msg);
                 this.repeatBool = true;
               }
+            }).catch(() => {
+              this.repeatBool = true;
             });
           } else {
             // 管理员登录
@@ -182,6 +186,8 @@ export default {
                 this.$Message.error(res.msg);
                 this.repeatBool = true;
               }
+            }).catch(() => {
+              this.repeatBool = true;
             });
           }
         }
@@ -212,6 +218,8 @@ export default {
           } else {
             this.$Message.error(res.msg);
           }
+          this.repeatBool = true;
+        }).catch(() => {
           this.repeatBool = true;
         });
     },

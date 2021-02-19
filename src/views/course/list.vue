@@ -16,24 +16,24 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       columns: [
         {
           title: "课程号",
-          key: "",
+          key: "course_no",
         },
         {
           title: "课程名",
-          key: "",
+          key: "name",
         },
         {
           title: "学时",
-          key: "",
+          key: "period",
         },
         {
           title: "教材",
-          key: "",
+          key: "book",
         },
         {
           title: "操作",
@@ -51,7 +51,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.editCourse(params.row.id);
+                      this.editCourse(params.row._id);
                     },
                   },
                 },
@@ -64,7 +64,7 @@ export default {
                     size: "small",
                   },
                   style: {
-                    marginRight: "5px",
+                    // marginRight: "5px",
                   },
                   on: {
                     click: () => {
@@ -86,25 +86,29 @@ export default {
       loading: true,
     };
   },
+  created () {
+    this.getList()
+  },
   methods: {
     // 获取课程列表
-    getList() {
+    getList () {
       this.$api.courselist(this.params).then((res) => {
         if (res.code == 200) {
           this.tableData = res.response;
+          this.loading = false;
         } else {
           this.$Message.error(res.msg);
         }
       });
     },
     //点击添加课程
-    addCourse() {
+    addCourse () {
       this.$router.push({
         name: "course-add",
       });
     },
     //点击编辑课程
-    editCourse(id) {
+    editCourse (id) {
       this.$router.push({
         name: "course-add",
         query: {
@@ -113,7 +117,7 @@ export default {
       });
     },
     //点击删除课程
-    delCourse(id) {
+    delCourse (id) {
       this.$Modal.confirm({
         title: "提示",
         content: "确定删除该课程吗？",

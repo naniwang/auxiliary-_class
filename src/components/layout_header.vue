@@ -21,7 +21,7 @@ export default {
     return {};
   },
   mounted () {
-    console.log(this.$store.state.user, 'user')
+
   },
   methods: {
     loginOut () {

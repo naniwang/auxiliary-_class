@@ -85,6 +85,9 @@ export default {
           this.$api.addstudent(this.formValidate).then(res => {
             if (res.code == 200) {
               this.$Message.success('保存成功')
+              this.$router.replace({
+                name: 'student-list'
+              })
             } else {
               this.$Message.error(res.msg)
             }

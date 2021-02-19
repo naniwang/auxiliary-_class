@@ -16,16 +16,17 @@ const createRouter = () => new Router({
 const router = createRouter();
 router.beforeEach(async (to, from, next) => {
   // 如有vuex没有登录信息 尝试同步cookie到vuex
-  if (!store.state.jsbToken) {
+  if (!store.state.fdbToken) {
     store.commit('cookieLoginToVuex');
   }
   const token = getToken()
   const user = getUser()
-  // if ((!token || !user) && to.meta.auth) {
-  //   next({
-  //     name: "LOGIN"
-  //   })
-  // }
-  next();
+  if ((!token || !user) && to.meta.auth) {
+    next({
+      name: "LOGIN"
+    })
+  }else{
+    next();
+  }
 })
 export default router;

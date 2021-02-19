@@ -12,13 +12,7 @@
           <FormItem label="课程名" prop="name">
             <Input v-model="formValidate.name" style="width:300px"></Input>
           </FormItem>
-          <!-- <FormItem label="联系电话" prop="mobile">
-            <Input v-model="formValidate.mobile" style="width:300px"></Input>
-          </FormItem>
-          <FormItem label="联系地址" prop="address">
-            <Input v-model="formValidate.address" style="width:300px"></Input>
-          </FormItem>
-          <FormItem label="所选课程" prop="course_id">
+          <!--<FormItem label="所选课程" prop="course_id">
             <Select v-model="formValidate.course_id" multiple style="width:300px">
               <Option v-for="item in courseDrop" :value="item.id" :key="item.id">{{ item.name }}</Option>
             </Select>
@@ -36,7 +30,6 @@ export default {
   data () {
     return {
       formValidate: {
-        id: 0,
         course_no: "",
         name: "",
         gender: 0,
@@ -62,6 +55,9 @@ export default {
           this.$api.addcourse(this.formValidate).then(res => {
             if (res.code == 200) {
               this.$Message.success('保存成功')
+              this.$router.replace({
+                name: 'course-list'
+              })
             } else {
               this.$Message.error(res.msg)
             }
