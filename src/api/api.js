@@ -94,6 +94,18 @@ export default {
     return fetch.fetchGet('api/course/info', params);
   },
   /**
+   * 获取成绩列表
+   */
+  scorelist(params) {
+    return fetch.fetchGet('api/score/list', params);
+  },
+  /**
+   * 添加或编辑成绩
+   */
+  addscore(params) {
+    return fetch.fetchPost('api/add/score', params);
+  },
+  /**
    * 管理员列表
    */
   adminlist(params) {
