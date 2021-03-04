@@ -25,6 +25,14 @@ router.beforeEach(async (to, from, next) => {
     next({
       name: "LOGIN"
     })
+  }else if(token && user){
+    if(to.name=='LOGIN'){
+      next({
+        name: "student-list"
+      })
+    }else{
+      next()
+    }
   }else{
     next();
   }

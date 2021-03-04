@@ -106,6 +106,18 @@ export default {
     return fetch.fetchPost('api/add/score', params);
   },
   /**
+   * 获取成绩详细信息
+   */
+  scroeinfo(params) {
+    return fetch.fetchGet('api/scroe/info', params);
+  },
+   /**
+   * 删除成绩
+   */
+  deletescroe(params) {
+    return fetch.fetchGet('api/delete/score', params);
+  },
+  /**
    * 管理员列表
    */
   adminlist(params) {

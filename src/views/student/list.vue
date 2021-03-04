@@ -1,6 +1,14 @@
 <template>
-  <div class="page-course-list">
+  <div class="page-course-list have-menu">
     <Content style="background:#F5F7F9;">
+      <Menu mode="horizontal" :active-name="params.type" @on-select="getStuTypeList">
+        <MenuItem name="1">一年级</MenuItem>
+        <MenuItem name="2">二年级</MenuItem>
+        <MenuItem name="3">三年级</MenuItem>
+        <MenuItem name="4">四年级</MenuItem>
+        <MenuItem name="5">五年级</MenuItem>
+        <MenuItem name="6">六年级</MenuItem>
+      </Menu>
       <Card shadow>
         <Button @click="addStudent" type="primary">添加学生</Button>
         <div class="pull-right">
@@ -15,7 +23,7 @@
             </FormItem>
             <FormItem label="学号">
               <Input
-                v-model="params.stiu_no"
+                v-model="params.stu_no"
                 placeholder="请输入学生学号"
                 style="width: 180px"
                 class="m-r-sm"
@@ -157,6 +165,7 @@ export default {
       params: {
         name: "",
         stu_no: "",
+        type: '1'
       },
       loading: true,
       updatePwdShow: false,
@@ -180,8 +189,14 @@ export default {
           this.$Message.error(res.msg);
         }
       }).catch(() => {
-        this.$Message.error('请求失败');
+        this.$Message.error('数据获取失败，请稍后重试！');
       });
+    },
+    // 点击选项卡
+    getStuTypeList (type) {
+      this.tableData = []
+      this.params.type = type;
+      this.getList()
     },
     // 点击筛选
     filter () {
@@ -191,6 +206,9 @@ export default {
     addStudent () {
       this.$router.push({
         name: "student-add",
+        query: {
+          type: this.params.type
+        }
       });
     },
     //点击编辑学生

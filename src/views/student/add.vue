@@ -6,6 +6,11 @@
     <Content>
       <Card dis-hover class="m-t-md">
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="120">
+          <FormItem label="年级" prop="course_id">
+            <Select v-model="formValidate.type" style="width:300px">
+              <Option v-for="item in classList" :value="item.type" :key="item.type">{{ item.label }}</Option>
+            </Select>
+          </FormItem>
           <FormItem label="学号" v-if="$route.query.stu_no">
             <Input v-model="formValidate.stu_no" style="width:300px" :disabled="true"></Input>
           </FormItem>
@@ -52,6 +57,7 @@ export default {
   data () {
     return {
       formValidate: {
+        type: '',
         stu_no: "",
         name: "",
         gender: 1,
@@ -70,11 +76,40 @@ export default {
         ]
       },
       courseDrop: [],
+      classList: [
+        {
+          label: '一年级',
+          type: '1'
+        },
+        {
+          label: '二年级',
+          type: '2'
+        },
+        {
+          label: '三年级',
+          type: '3'
+        },
+        {
+          label: '四年级',
+          type: '4'
+        },
+        {
+          label: '五年级',
+          type: '5'
+        },
+        {
+          label: '六年级',
+          type: '6'
+        }
+      ]
     };
   },
   created () {
     if (this.$route.query.stu_no) {
       this.getDetail()
+    }
+    if (this.$route.query.type) {
+      this.formValidate.type = this.$route.query.type
     }
   },
   methods: {

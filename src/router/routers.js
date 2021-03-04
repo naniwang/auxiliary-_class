@@ -1,5 +1,6 @@
 import studentRouter from './modules/student'
 import courseRouter from './modules/course'
+import scoreRouter from './modules/score'
 import adminRouter from './modules/admin'
 export default [{
     // 登录
@@ -58,6 +59,7 @@ export default [{
     children: [
       ...studentRouter,
       ...courseRouter,
+      ...scoreRouter,
       ...adminRouter
     ]
   },

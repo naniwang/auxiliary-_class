@@ -22,7 +22,7 @@
                 <template slot="title">
                   <Icon type="ios-navigate"></Icon>成绩
                 </template>
-                <MenuItem name="grade-list" :to="{name:'grade-list'}">成绩管理</MenuItem>
+                <MenuItem name="grade-list" :to="{name:'score-list'}">成绩管理</MenuItem>
               </Submenu>
               <Submenu name="4">
                 <template slot="title">
@@ -52,7 +52,7 @@ export default {
   components: {
     Head,
   },
-  data() {
+  data () {
     return {
       activeName: "student-list",
     };

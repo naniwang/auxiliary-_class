@@ -54,7 +54,7 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     const phoneValidate = (rule, value, callback) => {
       if (!value) {
         return callback(new Error("请输入手机号码"));
@@ -68,7 +68,7 @@ export default {
       columns: [
         {
           title: "姓名",
-          key: "true_name",
+          key: "name",
         },
         {
           title: "账户",
@@ -95,6 +95,7 @@ export default {
         account: "",
         mobile: "",
         password: "",
+        status: 1
       },
       ruleValidate: {
         name: [
@@ -136,13 +137,12 @@ export default {
       repeatBool: true,
     };
   },
-  created() {
-    console.log(this.$api.adminlist(this.params), "===========");
+  created () {
     this.getList();
   },
   methods: {
     // 获取管理员列表
-    getList() {
+    getList () {
       this.$api
         .adminlist(this.params)
         .then((res) => {
@@ -158,11 +158,11 @@ export default {
         });
     },
     //点击添加管理员
-    addAdmin() {
+    addAdmin () {
       this.addAdminShow = true;
     },
     //设置管理员离职和在职
-    statusChange(id, val) {
+    statusChange (id, val) {
       this.$api
         .updateadminstatus({
           id: id,
@@ -179,7 +179,7 @@ export default {
         });
     },
     // 提交确定
-    handleSubmit(name) {
+    handleSubmit (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
           if (!this.repeatBool) {
@@ -204,7 +204,7 @@ export default {
         }
       });
     },
-    handleReset(name) {
+    handleReset (name) {
       this.addAdminShow = false;
       this.$refs[name].resetFields();
     },

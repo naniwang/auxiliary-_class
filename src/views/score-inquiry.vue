@@ -1,7 +1,15 @@
 <template>
   <div class="score-inquiry-page">
     <studentHead></studentHead>
-    <div class="page-box sore-content">成绩</div>
+    <div class="page-box sore-content">
+      <Table
+        stripe
+        class="goods-table m-t-md"
+        :columns="columns"
+        :data="tableData"
+        :loading="loading"
+      ></Table>
+    </div>
   </div>
 </template>
 <script>
@@ -12,17 +20,32 @@ export default {
   },
   data () {
     return {
-      score: {}
+      columns: [
+        {
+          title: '学科名称',
+          key: ""
+        },
+        {
+          title: '成绩',
+          key: ""
+        }
+      ],
+      tableData: [],
+      loading: true
     }
   },
   created () {
-    // this.getScore();
+    this.getScore();
   },
   methods: {
     getScore () {
-      this.$api.inquirecorse().then(res => {
+      this.$api.inquirecorse({
+        stu_no: this.$store.state.user.stu_no
+      }).then(res => {
         if (res.code == 200) {
-          this.score = res.response
+          // this.score = res.response
+        } else {
+          this.$Message.error(res.msg)
         }
       })
     }

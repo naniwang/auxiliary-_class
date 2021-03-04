@@ -6,26 +6,50 @@
         <table cellspacing="0" cellpadding="0" width="100%" class="table-info">
           <tbody>
             <tr>
+              <td class="info-title">学号</td>
+              <td>{{infoData.stu_no}}</td>
               <td class="info-title">姓名</td>
               <td>{{infoData.name}}</td>
-              <td class="info-title">性别</td>
-              <td></td>
             </tr>
             <tr>
-              <td class="info-title">民族</td>
+              <td class="info-title">性别</td>
               <td></td>
-              <td class="info-title">政治面貌</td>
+              <td class="info-title">身份证号</td>
               <td></td>
             </tr>
             <tr>
               <td class="info-title">出生日期</td>
               <td></td>
+              <td class="info-title">民族</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="info-title">籍贯</td>
+              <td></td>
+              <td class="info-title">政治面貌</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="info-title">出生地</td>
+              <td></td>
+              <td class="info-title">邮政编码</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="info-title">联系人</td>
+              <td></td>
               <td class="info-title">联系电话</td>
               <td></td>
             </tr>
             <tr>
-              <td class="info-title">家庭住址</td>
+              <td class="info-title">现住址</td>
               <td colspan="3"></td>
+            </tr>
+            <tr>
+              <td class="info-title">辅修年级</td>
+              <td></td>
+              <td class="info-title">备注</td>
+              <td></td>
             </tr>
           </tbody>
         </table>
