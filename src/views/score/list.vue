@@ -126,7 +126,7 @@ export default {
         name: "",
         stu_no: ''
       },
-      addScoreShow: true,
+      addScoreShow: false,
       formData: {
         stu_no: '',
         name: '',

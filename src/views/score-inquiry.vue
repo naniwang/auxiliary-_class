@@ -38,12 +38,13 @@ export default {
     this.getScore();
   },
   methods: {
+    // 获取成绩
     getScore () {
       this.$api.inquirecorse({
         stu_no: this.$store.state.user.stu_no
       }).then(res => {
         if (res.code == 200) {
-          // this.score = res.response
+          this.tableData = res.response.score
         } else {
           this.$Message.error(res.msg)
         }

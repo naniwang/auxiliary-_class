@@ -109,8 +109,8 @@ body {
 }
 
 .have-menu>.ivu-layout-content {
-  padding-top: 60px;
-  /* padding-top: 35px; */
+  /* padding-top: 60px; */
+  padding-top: 35px;
 }
 
 .have-menu>.ivu-layout-content-2 {

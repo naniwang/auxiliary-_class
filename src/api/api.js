@@ -135,4 +135,16 @@ export default {
   updateadminstatus(params) {
     return fetch.fetchGet('api/update/admin/status', params);
   },
+  /**
+   * 设置收费标准
+   */
+   setrates(params) {
+    return fetch.fetchPost('api/set/rates', params);
+  },
+   /**
+   * 获取收费标准信息
+   */
+    getrates(params) {
+      return fetch.fetchGet('api/get/rates', params);
+    },
 }

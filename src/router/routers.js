@@ -2,6 +2,7 @@ import studentRouter from './modules/student'
 import courseRouter from './modules/course'
 import scoreRouter from './modules/score'
 import adminRouter from './modules/admin'
+import setupRouter from './modules/setup'
 export default [{
     // 登录
     path: '/',
@@ -50,6 +51,16 @@ export default [{
     component: resolve => require(['@/views/personal-info.vue'], resolve),
   },
   {
+    path: '/outing',
+    name: 'Outing',
+    meta: {
+      title: '郊游',
+      auth:true,
+      hideInMenu: true,
+    },
+    component: resolve => require(['@/views/outing.vue'], resolve),
+  },
+  {
     path: '/panel',
     name: 'Panel',
     redirect: {
@@ -60,7 +71,8 @@ export default [{
       ...studentRouter,
       ...courseRouter,
       ...scoreRouter,
-      ...adminRouter
+      ...adminRouter,
+      ...setupRouter
     ]
   },
 ]

@@ -11,12 +11,12 @@
             </Input>
           </FormItem>
           <FormItem prop="password">
-            <Input type="text" v-model="formRegist.password" placeholder="请输入密码">
+            <Input type="password" v-model="formRegist.password" placeholder="请输入密码">
               <Icon type="ios-lock-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>
           <FormItem prop="confirmPw">
-            <Input type="text" v-model="formRegist.confirmPw" placeholder="请输入确认密码">
+            <Input type="password" v-model="formRegist.confirmPw" placeholder="请输入确认密码">
               <Icon type="ios-lock-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>
@@ -38,7 +38,7 @@
             </Input>
           </FormItem>
           <FormItem prop="password">
-            <Input type="text" v-model="formLogin.password" placeholder="请输入密码">
+            <Input type="password" v-model="formLogin.password" placeholder="请输入密码">
               <Icon type="ios-lock-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>

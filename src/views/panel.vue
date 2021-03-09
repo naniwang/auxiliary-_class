@@ -34,7 +34,8 @@
                 <template slot="title">
                   <Icon type="ios-navigate"></Icon>设置
                 </template>
-                <MenuItem name="2-1">密码设置</MenuItem>
+                <MenuItem name="setup-rates" :to="{name:'setup-rates'}">收费标准</MenuItem>
+                <!-- <MenuItem name="2-1">密码设置</MenuItem> -->
               </Submenu>
             </Menu>
           </Sider>

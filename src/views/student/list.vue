@@ -1,15 +1,15 @@
 <template>
   <div class="page-course-list have-menu">
-    <Content style="background:#F5F7F9;">
-      <Menu mode="horizontal" :active-name="params.type" @on-select="getStuTypeList">
-        <MenuItem name="1">一年级</MenuItem>
-        <MenuItem name="2">二年级</MenuItem>
-        <MenuItem name="3">三年级</MenuItem>
-        <MenuItem name="4">四年级</MenuItem>
-        <MenuItem name="5">五年级</MenuItem>
-        <MenuItem name="6">六年级</MenuItem>
-      </Menu>
-      <Card shadow>
+    <Menu mode="horizontal" :active-name="params.type" @on-select="getStuTypeList">
+      <MenuItem name="1">一年级</MenuItem>
+      <MenuItem name="2">二年级</MenuItem>
+      <MenuItem name="3">三年级</MenuItem>
+      <MenuItem name="4">四年级</MenuItem>
+      <MenuItem name="5">五年级</MenuItem>
+      <MenuItem name="6">六年级</MenuItem>
+    </Menu>
+    <Content>
+      <Card shadow class="m-t-md">
         <Button @click="addStudent" type="primary">添加学生</Button>
         <div class="pull-right">
           <Form :label-width="60" class="flex-set">
@@ -194,6 +194,7 @@ export default {
     },
     // 点击选项卡
     getStuTypeList (type) {
+      this.loading = true
       this.tableData = []
       this.params.type = type;
       this.getList()

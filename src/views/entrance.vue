@@ -1,22 +1,36 @@
 <template>
   <div class="entrance">
     <studentHead></studentHead>
-    <div class="entrance-item" @click="score">
-      <a>成绩查询</a>
+    <div class="center-content">
+      <div class="entrance-item" @click="score">
+        <a>成绩查询</a>
+      </div>
+      <div class="entrance-item" @click="personal">
+        <a>个人信息</a>
+      </div>
+      <div class="entrance-item" @click="rates">
+        <a>收费标准</a>
+      </div>
+      <div class="entrance-item" @click="outing">
+        <a>郊游</a>
+      </div>
     </div>
-    <div class="entrance-item" @click="personal">
-      <a>个人信息</a>
-    </div>
+    <!-- 收费标准弹窗 -->
+    <rates v-model="ratesShow"></rates>
   </div>
 </template>
 <script>
 import studentHead from '@/components/student_head'
+import rates from '@/components/rates'
 export default {
   components: {
-    studentHead
+    studentHead,
+    rates
   },
   data () {
-    return {}
+    return {
+      ratesShow: false
+    }
   },
   methods: {
     score () {
@@ -28,6 +42,14 @@ export default {
       this.$router.push({
         name: 'personal-info'
       })
+    },
+    rates () {
+      this.ratesShow = true
+    },
+    outing () {
+      this.$router.push({
+        name: 'Outing'
+      })
     }
   }
 }
@@ -38,24 +60,31 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  .entrance-item {
-    width: 300px;
-    height: 200px;
-    border: 1px solid #999;
-    margin: 10px;
+  .center-content {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
-    font-size: 20px;
-    cursor: pointer;
-    a {
-      color: #333;
-      border-bottom: 2px solid #666;
-    }
-    &:hover {
+    width: 650px;
+    .entrance-item {
+      width: 300px;
+      height: 200px;
+      border: 1px solid #ccc;
+      margin: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 10px;
       a {
-        color: #2d8cf0;
-        border-color: #2d8cf0;
+        color: #666;
+        border-bottom: 2px solid #666;
+      }
+      &:hover {
+        a {
+          color: #2d8cf0;
+          border-color: #2d8cf0;
+        }
       }
     }
   }
